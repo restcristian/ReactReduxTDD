@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/header';
 import Headline from './components/headline';
 import SharedButton from './components/button';
@@ -14,21 +14,38 @@ const tempArr = [{
   email: 'joe@gmail.com',
   onlineStatus: true
 }];
+const initialState = {
+  hideBtn: false
+};
+
 function App(props) {
+
   const { posts } = props;
+  const [state, setState] = useState(initialState);
+
   function fetch() {
     props.fetchPosts();
+    exampleMethod_updatesState();
+  }
+
+  function exampleMethod_updatesState() {
+    const { hideBtn } = state;
+    setState({
+      hideBtn: !hideBtn
+    });
   }
   const configButton = {
     buttonText: 'Get posts',
     emitEvent: fetch
   };
   return (
-    <div className="App" data-test = "app-component">
+    <div className="App" data-test="app-component">
       <Header />
       <section className="main">
         <Headline header="Posts" desc="Click the button to render posts!" tempArr={tempArr} />
-        <SharedButton {...configButton} />
+        {!state.hideBtn &&
+          <SharedButton {...configButton} />
+        }
         {posts.length > 0 &&
           <div>
             {posts.map((post, index) => {

@@ -37,5 +37,12 @@ describe('App Component', () => {
         const component = findByTestAttr(wrapper, 'app-component');
         expect(component.length).toBe(1);
     });
+    // Add this test if component is a class rather than a FSC
+    // it('exampleMethod_updatesState Method should update state as expected', () => {
+    //     const classInstance = wrapper.instance();
+    //     classInstance.exampleMethod_updatesState();
+    //     const newState = classInstance.state.hideBtn;
+    //     expect(newState).toBe(true);
+    // });
 
 });
