@@ -1,5 +1,5 @@
 import React from 'react'
-import { findByTestAttr } from '../../../Utils';
+import { findByTestAttr, checkProps } from '../../../Utils';
 import { shallow } from 'enzyme';
 import Headline from './index';
 
@@ -9,6 +9,24 @@ const setUp = (props = {}) => {
 };
 
 describe('Headline Component', () => {
+
+    describe('Checking PropTypes', () => {
+        it('Should not throw a warning', () => {
+            const expectedProps = {
+                header:'Test Header',
+                desc:'Test Desc',
+                tempArr:[{
+                    fName:'Test fname',
+                    lName:'Test lName',
+                    email:'test@email.com',
+                    age:23,
+                    onlineStatus:false
+                }]
+            };
+            const propsErr = checkProps(Headline, expectedProps);
+            expect(propsErr).toBeUndefined();
+        });
+    });
 
     describe('Have props', () => {
         let wrapper;
